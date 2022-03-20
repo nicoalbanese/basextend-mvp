@@ -22,7 +22,10 @@ code {
 }
 
 .btn {
-  @apply py-2 px-4 bg-slate-50 text-slate-700 hover:opacity-50 rounded-lg;
+  @apply py-2 px-4 bg-slate-50 text-slate-700 hover:opacity-50 rounded-md;
+}
+.btn-danger {
+  @apply py-2 px-4 bg-red-500 text-slate-50 hover:opacity-50 rounded-md ml-2 inline-block cursor-pointer;
 }
 
 main {

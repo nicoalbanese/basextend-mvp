@@ -65,6 +65,11 @@ function App() {
     }
   };
 
+  const handleDestroy = () => {
+    console.log("destory...");
+    
+  };
+
   useEffect(() => {
     // console.log("its working");
     getPersistedState();
@@ -96,6 +101,7 @@ function App() {
               airtableSettings={activeBaseSettings}
               getPersistedState={getPersistedState}
               allBases={allBases}
+              handleDestroy={handleDestroy}
             />
           )}
         </div>
