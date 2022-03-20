@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import Alert from "./components/Alert";
+import BaseSelector from "./components/BaseSelector";
 import Search from "./components/search";
 import Settings from "./components/settings";
 
@@ -8,8 +9,10 @@ import Settings from "./components/settings";
 
 function App() {
   const [route, setRoute] = useState("search" || "settings");
-  const [airtableSettings, setAirtableSettings] = useState({});
+  const [activeBaseSettings, setActiveBaseSettings] = useState({});
   const [alert, setAlert] = useState({});
+
+  const [allBases, setAllBases] = useState([]);
 
   const getPersistedState = () => {
     if (chrome.extension !== undefined) {
@@ -20,7 +23,25 @@ function App() {
       chrome.storage.sync.get("state", (results) => {
         if (results.state) {
           console.log("we've got state");
-          setAirtableSettings(results.state);
+          // add a selectedBase to state
+          // so state will be state object with 1 string object (selectedBase: "baseName") and then 1 array with all settings
+
+          console.log(results.state);
+          // chrome.storage.sync.set({
+          //   state: { selectedBase: "First Base", bases: [results.state] },
+          // });
+
+          if (results.state.bases != null) {
+            setAllBases(results.state.bases);
+          }
+          if (results.state.selectedBase != null) {
+            const baseSettings = results.state.bases.filter((base) => {
+              console.log(base.baseName == results.state.selectedBase);
+              return base.baseName == results.state.selectedBase;
+            });
+            setActiveBaseSettings(baseSettings[0]);
+            console.log(activeBaseSettings)
+          }
         } else {
           // if no state -> setRoute to settings
           setAlert({ message: "please add base info", type: "caution" });
@@ -43,17 +64,20 @@ function App() {
         {alert.message && <Alert alert={alert} setAlert={setAlert} />}
         <div id="main-app">
           {route == "search" && (
-            <Search
-              setRoute={setRoute}
-              airtableSettings={airtableSettings}
-              setAlert={setAlert}
-            />
+            <>
+              <BaseSelector allBases={allBases} activeBaseSettings={activeBaseSettings} />
+              <Search
+                setRoute={setRoute}
+                airtableSettings={activeBaseSettings}
+                setAlert={setAlert}
+              />
+            </>
           )}
           {route == "settings" && (
             <Settings
               setRoute={setRoute}
               setAlert={setAlert}
-              airtableSettings={airtableSettings}
+              airtableSettings={activeBaseSettings}
               getPersistedState={getPersistedState}
             />
           )}

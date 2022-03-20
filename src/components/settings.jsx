@@ -22,6 +22,9 @@ const Settings = ({
     formData.baseId.length > 0
       ? (newState.baseId = formData.baseId)
       : (newState.baseId = airtableSettings.baseId);
+    formData.baseName.length > 0
+      ? (newState.baseName = formData.baseName)
+      : (newState.baseName = airtableSettings.baseName);
     formData.apiKey.length > 0
       ? (newState.apiKey = formData.apiKey)
       : (newState.apiKey = airtableSettings.apiKey);
@@ -62,6 +65,18 @@ const Settings = ({
       </div>
       <div id="settings-form">
         <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="baseIdentifier">Base Name</label>
+            <input
+              type="text"
+              name="baseName"
+              placeholder={
+                airtableSettings.baseName
+                  ? airtableSettings.baseName
+                  : "your base name"
+              }
+            />
+          </div>
           <div className="form-group">
             <label htmlFor="baseIdentifier">Base Identifier</label>
             <input
