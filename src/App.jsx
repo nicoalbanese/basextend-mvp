@@ -40,7 +40,7 @@ function App() {
               return base.baseName == results.state.selectedBase;
             });
             setActiveBaseSettings(baseSettings[0]);
-            console.log(activeBaseSettings)
+            console.log(activeBaseSettings);
           }
         } else {
           // if no state -> setRoute to settings
@@ -50,6 +50,13 @@ function App() {
       });
     } else {
       console.log("not open in chrome extension");
+    }
+  };
+
+  const handleBaseChange = (e) => {
+    const newBaseName = e.target.value;
+    if (newBaseName == "new") {
+      setActiveBaseSettings({baseName: "new"});
     }
   };
 
@@ -65,7 +72,11 @@ function App() {
         <div id="main-app">
           {route == "search" && (
             <>
-              <BaseSelector allBases={allBases} activeBaseSettings={activeBaseSettings} />
+              <BaseSelector
+                allBases={allBases}
+                activeBaseSettings={activeBaseSettings}
+                handleBaseChange={handleBaseChange}
+              />
               <Search
                 setRoute={setRoute}
                 airtableSettings={activeBaseSettings}
@@ -79,6 +90,7 @@ function App() {
               setAlert={setAlert}
               airtableSettings={activeBaseSettings}
               getPersistedState={getPersistedState}
+              allBases={allBases}
             />
           )}
         </div>

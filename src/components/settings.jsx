@@ -7,6 +7,7 @@ const Settings = ({
   setAlert,
   airtableSettings,
   getPersistedState,
+  allBases,
 }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -38,11 +39,21 @@ const Settings = ({
       ? (newState.columnForQuery = formData.columnForQuery)
       : (newState.columnForQuery = airtableSettings.columnForQuery);
 
-    console.log(newState);
+    // console.log(newState);
 
-    console.log("new state ->", newState);
+    // console.log("new state ->", newState);
+    // console.log("new state ->", {
+    //   bases: [...allBases, newState],
+    //   selectedBase: newState.baseName,
+    // });
+
     // send to local storage
-    chrome.storage.sync.set({ state: newState });
+    chrome.storage.sync.set({
+      state: {
+        bases: [...allBases, newState],
+        selectedBase: newState.baseName,
+      },
+    });
 
     // reset everything
     event.target.reset();
@@ -114,9 +125,7 @@ const Settings = ({
             />
           </div>
           <div className="form-group">
-            <label htmlFor="baseIdentifier">
-              Tab to Query
-            </label>
+            <label htmlFor="baseIdentifier">Tab to Query</label>
             <input
               type="text"
               name="queryList"

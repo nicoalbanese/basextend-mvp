@@ -2,7 +2,7 @@ import React from "react";
 
 const bases = [{ name: "first" }, { name: "second" }, { name: "third" }];
 
-const BaseSelector = ({ allBases, activeBaseSettings }) => {
+const BaseSelector = ({ allBases, activeBaseSettings, handleBaseChange }) => {
   return (
     <div className="w-full">
       <form onSubmit={(e) => e.preventDefault()} className="flex flex-col">
@@ -15,7 +15,7 @@ const BaseSelector = ({ allBases, activeBaseSettings }) => {
         <select
           name="baseSelected"
           id=""
-          onChange={(e) => console.log(e.target.value)}
+          onChange={handleBaseChange}
           className="py-2 px-2 rounded-md bg-slate-800"
         >
           {allBases.map((base) => (
