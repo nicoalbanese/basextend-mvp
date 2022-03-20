@@ -60,7 +60,7 @@ const Settings = ({
         <h1>Settings</h1>
         <div />
       </div>
-      <div>
+      <div id="settings-form">
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="baseIdentifier">Base Identifier</label>
@@ -99,6 +99,20 @@ const Settings = ({
             />
           </div>
           <div className="form-group">
+            <label htmlFor="baseIdentifier">
+              Tab to Query
+            </label>
+            <input
+              type="text"
+              name="queryList"
+              placeholder={
+                airtableSettings.queryList
+                  ? airtableSettings.queryList
+                  : "table1"
+              }
+            />
+          </div>
+          <div className="form-group">
             <label htmlFor="baseIdentifier">Api Key</label>
             <input
               name="apiKey"
@@ -107,20 +121,6 @@ const Settings = ({
                 airtableSettings.apiKey
                   ? airtableSettings.apiKey
                   : "your api key"
-              }
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="baseIdentifier">
-              Comma Seperated List of Tables to Query
-            </label>
-            <input
-              type="text"
-              name="queryList"
-              placeholder={
-                airtableSettings.queryList
-                  ? airtableSettings.queryList
-                  : "table1, table2, table3, ..."
               }
             />
           </div>

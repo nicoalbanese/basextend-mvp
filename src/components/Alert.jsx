@@ -7,7 +7,7 @@ const Alert = ({ alert, setAlert }) => {
     const interval = setInterval(() => {
       setIsActive(false);
       setAlert({});
-    }, 1000);
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 
@@ -16,7 +16,7 @@ const Alert = ({ alert, setAlert }) => {
       <div
         className={`py-4 px-2 ${alert.type == "caution" && "bg-yellow-100"} ${
           alert.type == "danger" && "bg-red-200"
-        } text-slate-900 flex items-center justify-center mb-2 rounded-lg`}
+        } text-slate-900 flex items-center justify-center mb-2 rounded-lg transition-all`}
       >
         {alert.message}
       </div>

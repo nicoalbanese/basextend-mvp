@@ -34,12 +34,16 @@ form {
 }
 
 .form-group {
-  @apply flex flex-col mb-4;
+  @apply flex flex-col;
 }
 
 .form-group > input {
-  @apply pl-2 py-1 rounded-md text-slate-700;
+  @apply pl-2 py-2 rounded-md text-slate-700;
 }
 .form-group > label {
   @apply text-slate-200 text-sm font-bold;
+}
+
+div#settings-form > form > .form-group {
+  @apply mb-5;
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { queryBase } from "../util/airtable";
 import FaCog from "./fa-icons/cog";
+import FaSearch from "./fa-icons/search";
 
 import Result from "./Result";
 
@@ -23,6 +24,8 @@ const Search = ({ setRoute, airtableSettings, setAlert }) => {
       } else {
         setAlert({ message: "no results found...", type: "danger" });
       }
+    } else {
+      setAlert({ message: "empty query...", type: "caution" });
     }
     event.target.reset();
   };
@@ -39,16 +42,19 @@ const Search = ({ setRoute, airtableSettings, setAlert }) => {
         </div>
       </div>
       <div>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
+        <form onSubmit={handleSubmit} className="flex w-full">
+          <div className="form-group w-full">
             <input
               type="text"
               placeholder="search query..."
               name="searchQuery"
             />
           </div>
-          <button type="submit" className="btn">
-            Search
+          <button
+            type="submit"
+            className="flex items-center justify-center py-2 px-2 mb-2"
+          >
+            <FaSearch />
           </button>
         </form>
       </div>
