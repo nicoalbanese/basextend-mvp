@@ -93,6 +93,13 @@ function App() {
     getPersistedState();
   }, []);
 
+  const handleBackButton = () => {
+    if (activeBaseSettings.baseName == "new") {
+      setActiveBaseSettings(allBases[0]);
+    }
+    setRoute("search");
+  };
+
   return (
     <div className="App">
       <main className="max-w-lg p-4 border">
@@ -120,6 +127,7 @@ function App() {
               getPersistedState={getPersistedState}
               allBases={allBases}
               handleDestroy={handleDestroy}
+              handleBackButton={handleBackButton}
             />
           )}
         </div>

@@ -18,15 +18,16 @@ const BaseSelector = ({ allBases, activeBaseSettings, handleBaseChange }) => {
           onChange={handleBaseChange}
           className="py-2 px-2 rounded-md bg-slate-800"
         >
-          {allBases.map((base) => (
-            <option
-              value={base.baseName}
-              key={base.baseName}
-              selected={base.baseName == activeBaseSettings.baseName}
-            >
-              {base.baseName}
-            </option>
-          ))}
+          {allBases.length > 0 &&
+            allBases.map((base) => (
+              <option
+                value={base.baseName}
+                key={base.baseName}
+                selected={base.baseName == activeBaseSettings.baseName}
+              >
+                {base.baseName}
+              </option>
+            ))}
           <option value="new">New...</option>
         </select>
       </form>

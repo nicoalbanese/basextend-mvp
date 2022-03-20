@@ -9,6 +9,7 @@ const Settings = ({
   getPersistedState,
   allBases,
   handleDestroy,
+  handleBackButton,
 }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -74,7 +75,7 @@ const Settings = ({
     <div>
       <div id="settings-header" className="grid grid-cols-3">
         <div>
-          <button className="p-2" onClick={() => setRoute("search")}>
+          <button className="p-2" onClick={handleBackButton}>
             <FaBack />
           </button>
         </div>
