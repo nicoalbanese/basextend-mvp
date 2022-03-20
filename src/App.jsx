@@ -62,12 +62,30 @@ function App() {
         (base) => base.baseName == newBaseName
       );
       setActiveBaseSettings(newlySelectedBaseSettings[0]);
+      chrome.storage.sync.set({
+        state: { selectedBase: newBaseName, bases: allBases },
+      });
     }
   };
 
   const handleDestroy = () => {
     console.log("destory...");
-    
+
+    const allBasesWithoutCurrent = allBases.filter(
+      (base) => base.baseName !== activeBaseSettings.baseName
+    );
+
+    if (allBases.length > 1) {
+      chrome.storage.sync.set({
+        state: {
+          bases: [...allBasesWithoutCurrent],
+          selectedBase: allBases[0].baseName,
+        },
+      });
+      setAlert({ message: "successfully deleted", type: "success" });
+      getPersistedState();
+      setRoute("search");
+    }
   };
 
   useEffect(() => {

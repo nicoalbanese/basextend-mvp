@@ -158,9 +158,11 @@ const Settings = ({
           <button type="submit" className="btn">
             Save
           </button>
-          <div onClick={handleDestroy} className="btn-danger">
-            Delete
-          </div>
+          {airtableSettings.baseName !== "new" && (
+            <div onClick={handleDestroy} className="btn-danger">
+              Delete
+            </div>
+          )}
         </form>
       </div>
     </div>
