@@ -46,14 +46,20 @@ const Settings = ({
     //   bases: [...allBases, newState],
     //   selectedBase: newState.baseName,
     // });
+    const allBasesWithoutCurrent = allBases.filter(
+      (base) => base.baseName !== airtableSettings.baseName
+    );
 
+    // console.log(allBasesWithoutCurrent);
     // send to local storage
     chrome.storage.sync.set({
       state: {
-        bases: [...allBases, newState],
+        bases: [...allBasesWithoutCurrent, newState],
         selectedBase: newState.baseName,
       },
     });
+
+    setAlert({ message: "successfully saved", type: "success" });
 
     // reset everything
     event.target.reset();

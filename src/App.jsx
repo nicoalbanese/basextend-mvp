@@ -56,7 +56,12 @@ function App() {
   const handleBaseChange = (e) => {
     const newBaseName = e.target.value;
     if (newBaseName == "new") {
-      setActiveBaseSettings({baseName: "new"});
+      setActiveBaseSettings({ baseName: "new" });
+    } else {
+      const newlySelectedBaseSettings = allBases.filter(
+        (base) => base.baseName == newBaseName
+      );
+      setActiveBaseSettings(newlySelectedBaseSettings[0]);
     }
   };
 

@@ -16,6 +16,8 @@ const Alert = ({ alert, setAlert }) => {
       <div
         className={`py-4 px-2 ${alert.type == "caution" && "bg-yellow-100"} ${
           alert.type == "danger" && "bg-red-200"
+        } ${
+          alert.type == "success" && "bg-green-200"
         } text-slate-900 flex items-center justify-center mb-2 rounded-lg transition-all`}
       >
         {alert.message}
